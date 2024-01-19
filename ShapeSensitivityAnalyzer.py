@@ -95,7 +95,7 @@ class ShapeSensitivityAnalyzer:
             pl.mean("dz_norm")
         ]
         )
-    def plot_sensitivity_surfaces(self, max_z=30):
+    def plot_sensitivity_surfaces(self, implant: str, max_z=22):
         x_data = self.z_avg_df["x"].to_numpy()
         y_data = self.z_avg_df["y"].to_numpy()
         dx_height = self.z_avg_df['dx_norm'].to_numpy()
@@ -104,29 +104,33 @@ class ShapeSensitivityAnalyzer:
 
         fig_dx = plt.figure(figsize=(10,10))
         ax_dx = fig_dx.add_subplot(projection='3d')
-        ax_dx.set_xlabel('x')
-        ax_dx.set_ylabel('y')
-        ax_dx.set_zlabel('dx')
-        # set z-range from 0-30
+        ax_dx.set_xlabel('Input X Rotation (degrees)')
+        ax_dx.set_ylabel('Input Y Rotation (degrees)')
+        ax_dx.set_zlabel('$\mathbf{S}$')
         ax_dx.set_zlim(0, max_z)
+        ax_dx.set_box_aspect(aspect=None, zoom = 0.97)
+        ax_dx.set_title("Differential $x$-Rotation Shape Sensitivity Plot for " + implant +" Implant")
 
 
         # want to do the same thing for dy
         fig_dy = plt.figure(figsize=(10,10))
         ax_dy = fig_dy.add_subplot(projection='3d')
-        ax_dy.set_xlabel('x')
-        ax_dy.set_ylabel('y')
-        ax_dy.set_zlabel('dy')
+        ax_dy.set_xlabel('Input X Rotation (degrees)')
+        ax_dy.set_ylabel('Input Y Rotation (degrees)')
+        ax_dy.set_zlabel('$\mathbf{S}$')
         ax_dy.set_zlim(0, max_z)
-
+        ax_dy.set_box_aspect(aspect=None, zoom = 0.97)
+        ax_dy.set_title("Differential $y$-Rotation Shape Sensitivity Plot for " + implant +" Implant")
 
         # want to do the same thing for dz
         fig_dz = plt.figure(figsize=(10,10))
         ax_dz = fig_dz.add_subplot(projection='3d')
-        ax_dz.set_xlabel('x')
-        ax_dz.set_ylabel('y')
-        ax_dz.set_zlabel('dz')
+        ax_dz.set_xlabel('Input X Rotation (degrees)')
+        ax_dz.set_ylabel('Input Y Rotation (degrees)')
+        ax_dz.set_zlabel('$\mathbf{S}$')
         ax_dz.set_zlim(0, max_z)
+        ax_dz.set_box_aspect(aspect=None, zoom = 0.97)
+        ax_dz.set_title("Differential $z$-Rotation Shape Sensitivity Plot for " + implant +" Implant")
 
         surfdx = ax_dx.plot_trisurf(x_data, y_data, dx_height, cmap='viridis', edgecolor='none')
         surfdy = ax_dy.plot_trisurf(x_data, y_data, dy_height, cmap='viridis', edgecolor='none')
