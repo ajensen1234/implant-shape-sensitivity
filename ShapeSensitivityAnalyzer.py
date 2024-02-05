@@ -104,37 +104,49 @@ class ShapeSensitivityAnalyzer:
 
         fig_dx = plt.figure(figsize=(10,10))
         ax_dx = fig_dx.add_subplot(projection='3d')
-        ax_dx.set_xlabel('Input X Rotation (degrees)')
-        ax_dx.set_ylabel('Input Y Rotation (degrees)')
-        ax_dx.set_zlabel('$\mathbf{S}$')
+        ax_dx.set_xlabel('Input X Rotation (degrees)', fontsize=16, labelpad=10)  # Add spacing
+        ax_dx.set_ylabel('Input Y Rotation (degrees)', fontsize=16, labelpad=10)  # Add spacing
+        ax_dx.set_zlabel('$\mathbf{S}$', fontsize=16, labelpad=10)  # Add spacing
         ax_dx.set_zlim(0, max_z)
-        ax_dx.set_box_aspect(aspect=None, zoom = 0.97)
-        ax_dx.set_title("Differential $x$-Rotation Shape Sensitivity Plot for " + implant +" Implant")
+        ax_dx.set_box_aspect(aspect=None, zoom=0.97)
+        ax_dx.set_title("Differential $x$-Rotation Shape Sensitivity Plot for " + implant +" Implant", fontsize=20)
+        ax_dx.tick_params(axis='both', labelsize=16)  # Set tick label size
+        surfdx = ax_dx.plot_trisurf(x_data, y_data, dx_height, cmap='viridis', edgecolor='none')
+        fig_dx.savefig('./figures/' + implant + '_dx_sensitivity.png')
+        plt.close(fig_dx)
 
-
-        # want to do the same thing for dy
+        # Differential y-rotation plot
         fig_dy = plt.figure(figsize=(10,10))
         ax_dy = fig_dy.add_subplot(projection='3d')
-        ax_dy.set_xlabel('Input X Rotation (degrees)')
-        ax_dy.set_ylabel('Input Y Rotation (degrees)')
-        ax_dy.set_zlabel('$\mathbf{S}$')
+        ax_dy.set_xlabel('Input X Rotation (degrees)', fontsize=16, labelpad=10)  # Add spacing
+        ax_dy.set_ylabel('Input Y Rotation (degrees)', fontsize=16, labelpad=10)  # Add spacing
+        ax_dy.set_zlabel('$\mathbf{S}$', fontsize=16, labelpad=10)  # Add spacing
         ax_dy.set_zlim(0, max_z)
-        ax_dy.set_box_aspect(aspect=None, zoom = 0.97)
-        ax_dy.set_title("Differential $y$-Rotation Shape Sensitivity Plot for " + implant +" Implant")
+        ax_dy.set_box_aspect(aspect=None, zoom=0.97)
+        ax_dy.set_title("Differential $y$-Rotation Shape Sensitivity Plot for " + implant +" Implant", fontsize=20)
+        ax_dy.tick_params(axis='both', labelsize=16)  # Set tick label size
+        surfdy = ax_dy.plot_trisurf(x_data, y_data, dy_height, cmap='viridis', edgecolor='none')
+        fig_dy.savefig('./figures/' + implant + '_dy_sensitivity.png')
+        plt.close(fig_dy)
 
-        # want to do the same thing for dz
         fig_dz = plt.figure(figsize=(10,10))
         ax_dz = fig_dz.add_subplot(projection='3d')
-        ax_dz.set_xlabel('Input X Rotation (degrees)')
-        ax_dz.set_ylabel('Input Y Rotation (degrees)')
-        ax_dz.set_zlabel('$\mathbf{S}$')
+        ax_dz.set_xlabel('Input X Rotation (degrees)', fontsize=16, labelpad=10)  # Add spacing
+        ax_dz.set_ylabel('Input Y Rotation (degrees)', fontsize=16, labelpad=10)  # Add spacing
+        ax_dz.set_zlabel('$\mathbf{S}$', fontsize=16, labelpad=10)  # Add spacing
         ax_dz.set_zlim(0, max_z)
-        ax_dz.set_box_aspect(aspect=None, zoom = 0.97)
-        ax_dz.set_title("Differential $z$-Rotation Shape Sensitivity Plot for " + implant +" Implant")
-
-        surfdx = ax_dx.plot_trisurf(x_data, y_data, dx_height, cmap='viridis', edgecolor='none')
-        surfdy = ax_dy.plot_trisurf(x_data, y_data, dy_height, cmap='viridis', edgecolor='none')
+        ax_dz.set_box_aspect(aspect=None, zoom=0.97)
+        ax_dz.set_title("Differential $z$-Rotation Shape Sensitivity Plot for " + implant +" Implant", fontsize=20)
+        ax_dz.tick_params(axis='both', labelsize=16)  # Set tick label size
         surfdz = ax_dz.plot_trisurf(x_data, y_data, dz_height, cmap='viridis', edgecolor='none')
+        fig_dz.savefig('./figures/' + implant + '_dz_sensitivity.png')
+        plt.close(fig_dz)
         
-        
-        
+        print("Average dx height: ", np.mean(dx_height))
+        print("dx range: ", np.max(dx_height), np.min(dx_height))
+        print("=============")
+        print("Average dy height: ", np.mean(dy_height))
+        print("dy range: ", np.max(dy_height), np.min(dy_height))
+        print("=============")
+        print("Average dz height: ", np.mean(dz_height))
+        print("dz range: ", np.max(dz_height), np.min(dz_height))
